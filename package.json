@@ -1,0 +1,64 @@
+{
+  "name": "eleventy-plugin-org",
+  "version": "1.0.0",
+  "description": "Eleventy plugin to generate posts from org-mode files",
+  "main": "lib/plugin.js",
+  "types": "lib/plugin.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kijowski/eleventy-plugin-org.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kijowski/eleventy-plugin-org/issues"
+  },
+  "homepage": "https://github.com/kijowski/eleventy-plugin-org#readme",
+  "scripts": {
+    "clean": "rm -rf ./lib",
+    "dev": "tsc --watch",
+    "build": "npm run clean && tsc",
+    "prepublishOnly": "npm run build",
+    "release": "np",
+    "version": "npm run build"
+  },
+  "keywords": [
+    "eleventy-plugin",
+    "eleventy",
+    "org-mode"
+  ],
+  "author": "Michał Kijowski",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@tsconfig/node18": "^18.2.4",
+    "@types/node": "^20.12.5",
+    "@types/unist": "^3.0.2",
+    "orgast-util-visit-ids": "^1.0.1",
+    "rehype-stringify": "^10.0.0",
+    "rehype-url-inspector": "^2.0.2",
+    "to-vfile": "^8.0.0",
+    "trough": "2.1.0",
+    "unified": "11.0.4",
+    "uniorg": "^1.1.1",
+    "uniorg-extract-keywords": "^1.0.1",
+    "uniorg-parse": "^2.1.1",
+    "uniorg-rehype": "^1.1.1",
+    "uniorg-slug": "^1.0.1",
+    "vfile": "^6.0.1",
+    "vfile-find-down": "7.1.0",
+    "vfile-reporter": "8.1.0"
+  },
+  "devDependencies": {
+    "np": "^10.0.3",
+    "typescript": "^5.4.4"
+  },
+  "np": {
+    "message": "Release: %s",
+    "tag": "latest",
+    "branch": "master",
+    "anyBranch": false
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}
