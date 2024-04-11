@@ -9,7 +9,10 @@
     "type": "git",
     "url": "git+https://github.com/kijowski/eleventy-plugin-org.git"
   },
-  "files": ["lib"],
+  "files": [
+    "lib",
+    "!lib/**/*.test.*"
+  ],
   "bugs": {
     "url": "https://github.com/kijowski/eleventy-plugin-org/issues"
   },
@@ -20,7 +23,8 @@
     "build": "npm run clean && tsc",
     "prepublishOnly": "npm run build",
     "release": "np",
-    "version": "npm run build"
+    "version": "npm run build",
+    "test": "tsx --test"
   },
   "keywords": [
     "eleventy-plugin",
@@ -50,6 +54,7 @@
     "@types/node": "^20.12.5",
     "@types/unist": "^3.0.2",
     "np": "^10.0.3",
+    "tsx": "^4.7.2",
     "typescript": "^5.4.4"
   },
   "np": {
