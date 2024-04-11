@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/kijowski/eleventy-plugin-org.git"
   },
+  "files": ["lib"],
   "bugs": {
     "url": "https://github.com/kijowski/eleventy-plugin-org/issues"
   },
@@ -29,9 +30,6 @@
   "author": "Michał Kijowski",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@tsconfig/node18": "^18.2.4",
-    "@types/node": "^20.12.5",
-    "@types/unist": "^3.0.2",
     "orgast-util-visit-ids": "^1.0.1",
     "rehype-stringify": "^10.0.0",
     "rehype-url-inspector": "^2.0.2",
@@ -48,6 +46,9 @@
     "vfile-reporter": "8.1.0"
   },
   "devDependencies": {
+    "@tsconfig/node18": "^18.2.4",
+    "@types/node": "^20.12.5",
+    "@types/unist": "^3.0.2",
     "np": "^10.0.3",
     "typescript": "^5.4.4"
   },
