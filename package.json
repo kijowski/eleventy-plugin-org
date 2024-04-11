@@ -1,6 +1,6 @@
 {
   "name": "eleventy-plugin-org",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Eleventy plugin to generate posts from org-mode files",
   "main": "lib/plugin.js",
   "types": "lib/plugin.d.ts",
@@ -56,7 +56,8 @@
     "message": "Release: %s",
     "tag": "latest",
     "branch": "master",
-    "anyBranch": false
+    "anyBranch": false,
+    "tests": false
   },
   "publishConfig": {
     "access": "public",
