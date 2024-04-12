@@ -1,6 +1,6 @@
 {
   "name": "eleventy-plugin-org",
-  "version": "1.0.0-2",
+  "version": "1.0.0",
   "description": "Eleventy plugin to generate posts from org-mode files",
   "main": "lib/plugin.js",
   "types": "lib/plugin.d.ts",
