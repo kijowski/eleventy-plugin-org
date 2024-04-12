@@ -29,6 +29,7 @@ async function processPosts(files: VFile[]) {
         console.error("Error reading file", file, e);
         throw e;
       }
+      file.path = file.data.slug!;
 
       return processOrgFile(file);
     })
