@@ -24,13 +24,13 @@ export default async function (config: any, overrideOptions: PluginOptions) {
     if (images) {
       for (const image of images) {
         try {
-          let fromPath = image.from;
-          if (fromPath.startsWith("~")) {
-            fromPath = fromPath.replace("~", os.homedir());
+          let from = image.from;
+          if (from.startsWith("~")) {
+            from = from.replace("~", os.homedir());
+          } else {
+            from = path.join(options.orgDir, from);
           }
-          const from = fromPath;
           const to = path.join(config.dir.output, image.to);
-
           if (!fs.existsSync(path.dirname(to))) {
             fs.mkdirSync(path.dirname(to), { recursive: true });
           }
