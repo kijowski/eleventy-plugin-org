@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ post.data.title }}</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  </head>
+  <body>
+    <header>
+      <h1>Org notes</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a class="current" href="/posts">Posts</a></li>
+
+      </nav>
+    </header>
+
+    <main>
+      <h1>All posts</h1>
+
+      <ul>
+        {% for post in collections.org %}
+          <li><a href="{{post.data.slug}}">{{ post.data.title }}</a> <time datetime="{{post.data.date}}">{{post.data.date}}</time></li>
+        {% endfor %}
+      </ul>
+    </main>
+
+    <footer>
+      <p>Org notes website.</p>
+    </footer>
+
+  </body>
+</html>

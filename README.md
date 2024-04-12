@@ -9,7 +9,7 @@ This plugin lets you pull your org notes into eleventy data for further processi
 - handles images linked in notes
 - compatible with org-roam
 
-## Usage
+## Setup
 Install the plugin:
 ```bash
 npm install eleventy-plugin-org
@@ -29,6 +29,48 @@ module.exports = function (eleventyConfig) {
 - `blogTag` - (default: null) optionally can filter notes to those having specific org tag
 - `collectionName` - (default: "org") name of the eleventy collection that org files will be assigned to
 - `imageFolder` - (default: "org-images") name of the folder to copy images from org notes
+
+## Usage
+After setting everything up plugin will create a new eleventy collection with data representing your org notes. By default this collection is named `org`.
+
+The data structure for each note is following:
+```ts
+interface Note {
+  title: string; // Note title
+  slug: string; // Note slug derived from file name
+  content: string; // Html content of the note
+  tags: string[]; // File tags
+  date: string // Eleventy compatible date in format 'YYYY-MM-DD'
+  data: {
+    links: Set<string>; // Set of links coming from that page
+    backlinks: Map<string, { slug: string, title: string } // Map of backlinks for given note
+    // all of the keywords parsed from org file header 
+  }
+}
+```
+
+You can generate files from the data by using eleventy paging feature eg.:
+```
+---
+pagination:
+    data: collections.org
+    size: 1
+    alias: post
+	addAllPagesToCollections: true
+permalink: "{{ post.data.slug }}/"
+---
+<!DOCTYPE html>
+<html>
+  <body>
+  ...
+    <h1>{{ post.title }}</h1>
+
+    {{ post.content | raw }}
+  ...
+  </body>
+</html>
+```
+You can find more complete example in [example folder](./example/)
 
 ## Inspiration
 Thanks to [uniorg](https://github.com/rasendubi/uniorg) library for providing a great way to parse and work with org-mode files. Base of this plugin has been extracted from one of the examples supplied by uniorg

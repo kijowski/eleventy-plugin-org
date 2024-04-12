@@ -185,6 +185,7 @@ export const loadPosts = async (pagesDirectory: string, searchTag?: string) => {
       ...file,
       date: file.data.date,
       tags: file.data.tags,
+      title: file.data.title,
       content: file.value,
       // page: { date: file.data.date },
     }))
