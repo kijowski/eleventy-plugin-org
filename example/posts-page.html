@@ -1,0 +1,15 @@
+---
+title: Posts
+layout: layout.html
+permalink: /posts/
+---
+<h1>All posts</h1>
+
+<ul>
+  {% for post in collections.org %}
+  <li>
+    <a href="{{post.data.slug}}">{{ post.data.title }}</a>
+    <time datetime="{{post.data.date}}">{{post.data.date}}</time>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,20 @@
+---
+pagination:
+  data: collections.orgTags
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag.tagName }}/
+layout: layout.html
+eleventyComputed:
+  title: Tagged {{ tag.tagName }}
+---
+
+<h1>Tagged {{tag.tagName}}</h1>
+
+<ul>
+  {% for post in tag.posts %}
+  <li><a href="{{post.data.slug}}">{{ post.data.title }}</a>
+    <time datetime="{{ post.data.date}}">{{post.data.date}}</time></li>
+  {% endfor %}
+</ul>
+

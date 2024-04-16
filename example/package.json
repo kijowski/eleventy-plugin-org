@@ -2,6 +2,7 @@
   "name": "Test project",
   "version": "1.0.0",
   "description": "Test project",
+  "type": "module",
   "scripts": {
     "build": "npx @11ty/eleventy",
     "dev": "npx @11ty/eleventy --serve"

@@ -60,9 +60,7 @@
   "np": {
     "message": "Release: %s",
     "tag": "latest",
-    "branch": "master",
-    "anyBranch": false,
-    "tests": false
+    "branch": "master"
   },
   "publishConfig": {
     "access": "public",

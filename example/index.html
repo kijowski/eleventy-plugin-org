@@ -1,38 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Org notes</title>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-  </head>
-  <body>
-    <header>
-      <h1>Org notes</h1>
-      <nav>
-        <ul>
-          <li><a class="current" href="/">Home</a></li>
-          <li><a href="/posts">Posts</a></li>
-        </ul>
-      </nav>
-    </header>
+---
+title: Home
+layout: layout.html
+---
 
-    <main>
-      <h1>Hello there!</h1>
-      <p>Welcome to page with all of my org notes</p>
-      <p>My 5 most recent notes are:</p>
+<h1>Hello there!</h1>
+<p>Welcome to page with all of my org notes</p>
+<p>My 5 most recent notes are:</p>
 
-      <ul>
-        {% for post in collections.org limit:5 %}
-          <li><a href="{{post.data.slug}}">{{ post.data.title }}</a> 
-           <time datetime="{{ post.data.date}}">{{post.data.date}}</time></li>
-        {% endfor %}
-      </ul>
-    </main>
+<ul>
+  {% for post in collections.org limit:5 %}
+  <li>
+    <a href="{{post.data.slug}}">{{ post.data.title }}</a>
+    <time datetime="{{ post.data.date}}">{{post.data.date}}</time>
+  </li>
+  {% endfor %}
+</ul>
 
-    <footer>
-      <p>Org notes website.</p>
-    </footer>
-
-  </body>
-</html>

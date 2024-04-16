@@ -1,0 +1,35 @@
+---
+pagination:
+    data: collections.org
+    size: 1
+    alias: post
+	addAllPagesToCollections: true
+permalink: "{{ post.data.slug }}/"
+layout: layout.html
+eleventyComputed:
+  title: "{{ post.data.title }}"
+---
+
+<h1>{{ post.data.title }}</h1>
+
+{{ post.content | raw }}
+
+{% if post.data.backlinks.size > 0 %}
+<h3>Backlinks</h3>
+<ul>
+  {% for backlink in post.data.backlinks %}
+  <li><a href="{{backlink[1].slug}}">{{ backlink[1].title }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+
+{% if post.data.tags.length > 0 %}
+<h3>Tags</h3>
+<ul>
+  {% for tag in post.data.tags %}
+  <li><a href="/tags/{{tag}}">{{tag}}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+

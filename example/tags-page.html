@@ -1,0 +1,14 @@
+---
+title: Tags
+layout: layout.html
+permalink: /tags/
+---
+<h1>All tags</h1>
+
+<ul>
+  {% for tag in collections.orgTags %}
+  <li>
+    <a href="/tags/{{tag.tagName}}">{{tag.tagName}}</a>
+  </li>
+  {% endfor %}
+</ul>
