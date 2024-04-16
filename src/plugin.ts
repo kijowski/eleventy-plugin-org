@@ -42,9 +42,21 @@ export default async function (config: any, overrideOptions: PluginOptions) {
     }
   });
 
-  config.addWatchTarget(options.orgDir);
+  config.addCollection(`${options.collectionName}Tags`, function () {
+    const tags = new Set(data.flatMap((file) => file.tags ?? []));
+    if (options.blogTag) {
+      tags.delete(options.blogTag);
+    }
+
+    return [...tags].map((tag) => {
+      const posts = data.filter((post) => post.tags?.includes(tag));
+      return { tagName: tag, posts };
+    });
+  });
 
   config.addCollection(options.collectionName, function () {
     return data;
   });
+
+  config.addWatchTarget(options.orgDir);
 }

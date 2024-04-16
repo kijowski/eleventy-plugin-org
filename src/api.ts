@@ -187,7 +187,6 @@ export const loadPosts = async (pagesDirectory: string, searchTag?: string) => {
       tags: file.data.tags,
       title: file.data.title,
       content: file.value,
-      // page: { date: file.data.date },
     }))
     .toSorted((a, b) => b.date?.localeCompare(a.date ?? "") ?? 0);
 };

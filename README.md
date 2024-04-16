@@ -7,6 +7,7 @@ This plugin lets you pull your org notes into eleventy data for further processi
 - handles org id links and translates them to relative file links
 - calculates backlinks for notes
 - handles images linked in notes
+- extracts tags assigned in org mode
 - compatible with org-roam
 
 ## Setup
@@ -44,7 +45,7 @@ interface Note {
   data: {
     links: Set<string>; // Set of links coming from that page
     backlinks: Map<string, { slug: string, title: string } // Map of backlinks for given note
-    // all of the keywords parsed from org file header 
+    // all of the keywords parsed from org file header
   }
 }
 ```
@@ -70,6 +71,26 @@ permalink: "{{ post.data.slug }}/"
   </body>
 </html>
 ```
+Unfortunately at this point in time eleventy does not support setting tags while dynamically creating the pages, so you can't use `collection.tagName` to get the org mode pages tagged with `tagName`. Because of that there is a second collection created by suffixing base collection with `Tags` (so `orgTags` by default). Each element in tags collection nas `tagName` and `posts` fields.
+
+Using this collection you can create tag pages eg.
+```
+---
+pagination:
+  data: collections.orgTags
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag.tagName }}/
+eleventyComputed:
+  title: Tagged {{ tag.tagName }}
+---
+...
+{% for post in tag.posts %}
+<li><a href="{{post.data.slug}}">{{ post.data.title }}</a></li>
+{% endfor %}
+...
+```
+
 You can find more complete example in [example folder](./example/)
 
 ## Inspiration
