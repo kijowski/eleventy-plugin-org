@@ -27,7 +27,9 @@ module.exports = function (eleventyConfig) {
 
 ## Configuration options
 - `orgDir` - folder with org files
-- `blogTag` - (default: null) optionally can filter notes to those having specific org tag
+- `blogTag` - (default: null) optionally can filter notes to those having specific org tags, can be a string or array of strings
+- `excludeTags` - (default: null) an array of tags - notes with that tags will be filtered out of the final collection
+- `noexportCheck` - (default: true) whether to automatically filter out notes with nooexport tag (default org-mode tag for (wait for it) disabling export)
 - `collectionName` - (default: "org") name of the eleventy collection that org files will be assigned to
 - `imageFolder` - (default: "org-images") name of the folder to copy images from org notes
 

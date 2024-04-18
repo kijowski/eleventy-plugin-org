@@ -5,11 +5,13 @@ import { loadPosts } from "./api.js";
 
 interface RequiredOptions {
   orgDir: string;
-  blogTag?: string;
+  blogTag?: string | string[];
+  excludeTags?: string[];
 }
 const defaultOptions = {
   collectionName: "org",
   imageFolder: "org-images",
+  noexportCheck: true,
 };
 
 type PluginOptions = Partial<typeof defaultOptions> & RequiredOptions;
@@ -17,7 +19,19 @@ type PluginOptions = Partial<typeof defaultOptions> & RequiredOptions;
 export default async function (config: any, overrideOptions: PluginOptions) {
   const options = { ...defaultOptions, ...overrideOptions };
 
-  const data = await loadPosts(options.orgDir, options.blogTag);
+  const excludeTags = [...(options.excludeTags ?? [])];
+  if (options.noexportCheck) {
+    excludeTags.push("noexport");
+  }
+
+  const blogTags: string[] = [];
+  if (typeof options.blogTag === "string") {
+    blogTags.push(options.blogTag);
+  } else {
+    blogTags.push(...(options.blogTag ?? []));
+  }
+
+  const data = await loadPosts(options.orgDir, blogTags, excludeTags);
 
   data.forEach((file) => {
     const images = file.data.images;
@@ -44,8 +58,8 @@ export default async function (config: any, overrideOptions: PluginOptions) {
 
   config.addCollection(`${options.collectionName}Tags`, function () {
     const tags = new Set(data.flatMap((file) => file.tags ?? []));
-    if (options.blogTag) {
-      tags.delete(options.blogTag);
+    for (const tag of blogTags) {
+      tags.delete(tag);
     }
 
     return [...tags].map((tag) => {

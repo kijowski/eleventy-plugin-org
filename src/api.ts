@@ -36,14 +36,27 @@ async function processPosts(files: VFile[]) {
   );
 }
 
-function filterPosts(searchTag?: string) {
+function filterPosts(searchTags: string[], excludeTags: string[]) {
   return function (files: VFile[]) {
-    if (searchTag == null || searchTag === "") {
-      return files;
+    let candidates;
+    if (searchTags.length === 0) {
+      candidates = files;
+    } else {
+      candidates = files.filter((file) =>
+        file.data.tags?.find((tag) => searchTags.includes(tag))
+      );
     }
-    return files.filter((file) =>
-      file.data.tags?.find((tag) => tag === searchTag)
-    );
+    if (excludeTags.length === 0) {
+      return candidates;
+    }
+
+    const excludeSet = new Set(excludeTags);
+
+    return candidates.filter((file) => {
+      const tagSet = new Set(file.data.tags ?? []);
+      const unionSet = new Set([...excludeSet, ...tagSet]);
+      return unionSet.size === excludeSet.size + tagSet.size;
+    });
   };
 }
 
@@ -164,11 +177,15 @@ async function convertPosts(files: VFile[]) {
   );
 }
 
-export const loadPosts = async (pagesDirectory: string, searchTag?: string) => {
+export const loadPosts = async (
+  pagesDirectory: string,
+  searchTags: string[],
+  excludeTags: string[]
+) => {
   const processor = trough()
     .use(collectFiles)
     .use(processPosts)
-    .use(filterPosts(searchTag))
+    .use(filterPosts(searchTags, excludeTags))
     .use(processLinks)
     .use(convertPosts)
     .use(populateBacklinks);
